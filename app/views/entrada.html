@@ -1,32 +1,31 @@
 <input type="search" placeholder="Buscar Entrega">
 <hr>
-<table class="table table-hover table-condensed">
+<table class="table table-hover table-responsive">
   <thead>
-    <th>Cliente</th>
-    <th># Documento</th>
-    <th># Entrada</th>
-    <th># Estado</th>
-    <th>Entrega</th>
+      <th>#</th>
+      <th>Cliente</th>
+      <th># Documento</th>
+      <th># Entrada</th>
+      <th># Estado</th>
+      <th>Entrega</th>
+      <th>Operario</th>
+      <th>Prioridad</th>
   </thead>
   <tbody ng-repeat="entrega in listaEntrega">
       <tr >
-        <th scope="row">{{$index+1}}</th>
+        <td scope="row">{{$index+1}}</td>
         <td>{{entrega.CardName}}</td>
         <td>{{entrega.DocNum}}</td>
         <td>{{entrega.DocEntry}}</td>
         <td>{{entrega.DocStatus}}</td>
         <td>{{entrega.Entrega}}</td>
         <td>
-          <div class="btn-group">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="btn-group" >
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="glyphicon glyphicon-user"> </i> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
+              <li ng-repeat="operador in listaOperador"><a>{{operador.nombre}}</a></li>
             </ul>
           </div>
         </td>
@@ -36,11 +35,7 @@
               <i class="glyphicon glyphicon-exclamation-sign"> </i> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
+              <li><a ng-repeat="prioridad in listaPrioridad">{{prioridad.nombre}}</a></li>
             </ul>
           </div>
         </td>

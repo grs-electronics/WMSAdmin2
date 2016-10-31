@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-select/dist/css/bootstrap-select.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -41,7 +42,10 @@
             <ul class="nav navbar-nav" ng-show="showMenu">
               <li ng-class="{active:isActive('/')}"><a ng-href="#/">Home</a></li>
               <li ng-class="{active:isActive('/entrada')}"><a ng-href="#/entrada">Entrada</a></li>
-              <li><a href="javascript:" ng-click="logout()">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-show="showMenu">
+              <li><a href=""> Bienvenido {{user.username}} </a></li>
+              <li><a href="javascript:" ng-click="logout()" ><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
             </ul>
           </div>
         </div>
@@ -79,6 +83,7 @@
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="bower_components/angular-base64/angular-base64.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -90,6 +95,11 @@
         <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/entradaproducto.js"></script>
         <script src="scripts/services/entrada.factory.js"></script>
+        <script src="scripts/services/operario.factory.js"></script>
+        <script src="scripts/controllers/operador.controller.js"></script>
+        <script src="scripts/filters/operador.filter.js"></script>
+        <script src="scripts/services/prioridad.factory.js"></script>
         <!-- endbuild -->
+
 </body>
 </html>

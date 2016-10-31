@@ -7,7 +7,9 @@
  * # auth.factory
  * Factory in the WMSWeb.
  */
-var URL_TOKEN="http://localhost:8080/api/oauth/token";
+var URL_BASE="http://localhost:8080";
+var URL_TOKEN=URL_BASE+"/api/oauth/token";
+var URL_USER=URL_BASE+"/api/user";
 var auth = "acme:acmesecret";
 angular.module('WMSWeb')
   .factory('AuthenticationFactory', function ($window) {
@@ -36,7 +38,7 @@ angular.module('WMSWeb')
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
             "Access-Control-Allow-Origin": "*",
-            'Authorization': 'Basic ' + auth
+            'Authorization': 'Basic ' + $base64.encode('acme:acmesecret')
           }
         });
       },
@@ -54,10 +56,28 @@ angular.module('WMSWeb')
           delete $window.sessionStorage.expires_in ; // to fetch the user details on refresh
           delete $window.sessionStorage.scope ; // to fetch the user details on refresh
           delete $window.sessionStorage.jti;
+          delete $window.sessionStorage.username;
+          delete $window.sessionStorage.rol;
+
           $window.location.href = '/#/login';
           $window.location.reload();
           //$location.path("/login");
         }
+      }
+    }
+  })
+  .factory('UserDetailsFactory',function ($http,$base64) {
+    return{
+      info:function () {
+        return $http({
+          method: "post",
+          url: URL_USER,
+          headers: {
+            'Accept': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Authorization': 'Basic ' + auth
+          }
+        });
       }
     }
   })

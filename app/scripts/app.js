@@ -12,7 +12,8 @@ angular.module('WMSWeb', [
     'ngAnimate',
     'angular-md5',
     'base64',
-    'ngRoute'
+    'ngRoute',
+    'ui.select'
   ])
   .config(function ($routeProvider,$httpProvider) {
     $httpProvider.interceptors.push('TokenInterceptor');
@@ -55,4 +56,17 @@ angular.module('WMSWeb', [
         $location.path('/');
       }
     })
+}).run(function ($rootScope,UserDetailsFactory,$window) {
+  $rootScope.user={
+    username:'',
+    rol:''
+  };
+  UserDetailsFactory.info().success(function (data) {
+    $window.sessionStorage.username=data.principal;
+    $window.sessionStorage.rol=data.authorities[0].authority;
+    $rootScope.user.username=$window.sessionStorage.username;
+    $rootScope.user.rol=$window.sessionStorage.rol;
+  }).error(function (error) {
+    console.log(error);
+  });
 });

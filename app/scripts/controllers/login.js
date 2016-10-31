@@ -19,10 +19,7 @@ angular.module('WMSWeb')
         UserAuthFactory.login($scope.usuario.nick, $scope.usuario.contrasena).success(function(data) {
 
           AuthenticationFactory.isLogged = true;
-          AuthenticationFactory.user = $scope.usuario.nick;
-          //AuthenticationFactory.userRole = data.user.role;
 
-          $window.sessionStorage.access_token= $scope.usuario.nick;
           $window.sessionStorage.access_token= data.access_token;
           $window.sessionStorage.refresh_token = data.refresh_token; // to fetch the user details on refresh
           $window.sessionStorage.token_type = data.token_type; // to fetch the user details on refresh
